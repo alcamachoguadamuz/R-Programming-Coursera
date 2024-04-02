@@ -9,21 +9,22 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
   specdata <- paste(getwd(), "/", directory, "/", sep="")
   
   # 2. Define local variables
-  files <- list.files(specdata)
-  monitors <- c()
+  specdata_files <- list.files(specdata)
+  monitors <- NA
   
   # 3. Get all data for the monitors 
-  for (monitor in id) {
+  for (i in id) {
     # 3.1. Get the monitor's data
-    monitor_data <- read.csv(paste(specdata, files[i], sep=""))
+    monitor_dir <- paste(specdata, specdata_files[i], sep="")
+    monitor_data <- read.csv(monitor_dir)
     
     # 3.2. Store the monitor's data
-    monitors <- rbind(data, monitor_data)
+    monitors <- rbind(monitors, monitor_data)
   }
   
-  # 4) Calculate the mean of the pollutant for all monitors
-  mean_pollutant <- mean(data[[pollutant]], na.rm=TRUE)
-    
-  # 5) Return mean of the pollutant
-  return(mean_pollutant)
+  # 4. Calculate the mean of the pollutant for all monitors
+  monitors_mean <- mean(monitors[[pollutant]], na.rm=TRUE)
+  
+  # 5. Return the mean of the pollutant across all monitors
+  return(monitors_mean)
 }
