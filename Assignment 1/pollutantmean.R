@@ -5,22 +5,25 @@
 
 pollutantmean <- function(directory, pollutant, id = 1:332) {
   
-  # 1) Define local variables
+  # 1. Define local variables
   files <- list.files(directory)
-  monitors <- NA
+  monitors <- c()
   
-  # 2) Get the dir of the csvs
-  csv_dir <- paste(getwd(), "/", directory, "/", sep="")
+  # 2. Get the dir of the specdata folder
+  specdata <- paste(getwd(), "/", directory, "/", sep="")
   
-  # 3) Get all data for the monitors 
-  for (i in id) {
-    monitor_data <- read.csv(paste(csv_dir, files[i], sep=""))
-    monitors <- rbind(monitors, monitor_data)
+  # 3. Get all data for the monitors 
+  for (monitor in id) {
+    # 3.1. Get the monitor's data
+    monitor_data <- read.csv(paste(specdata, files[i], sep=""))
+    
+    # 3.2. Store the monitor's data
+    monitors <- rbind(data, monitor_data)
   }
   
   # 4) Calculate the mean of the pollutant for all monitors
   mean_pollutant <- mean(data[[pollutant]], na.rm=TRUE)
-  
+    
   # 5) Return mean of the pollutant
   return(mean_pollutant)
 }
