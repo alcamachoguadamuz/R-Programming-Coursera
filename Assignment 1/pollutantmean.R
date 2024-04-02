@@ -10,13 +10,12 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
   
   # 2. Define local variables
   specdata_files <- list.files(specdata)
-  monitors <- NA
+  monitors <- c()
   
   # 3. Get all data for the monitors 
   for (i in id) {
     # 3.1. Get the monitor's data
-    monitor_dir <- paste(specdata, specdata_files[i], sep="")
-    monitor_data <- read.csv(monitor_dir)
+    monitor_data <- read.csv(paste(specdata, specdata_files[i], sep=""))
     
     # 3.2. Store the monitor's data
     monitors <- rbind(monitors, monitor_data)

@@ -8,14 +8,14 @@ complete <- function(directory, id = 1:332) {
   specdata <- paste(getwd(), "/", directory, "/", sep="")
   
   # 2. Define local variables
-  files <- list.files(specdata)
+  specdata_files <- list.files(specdata)
   ids <- c()
   nobs <- c()
   
   # 3. For each monitor, add its id and number of complete cases
   #    to respective vectors.
   for (i in id) {
-    monitor_data <- read.csv(paste(specdata, file_list[i], sep=""))
+    monitor_data <- read.csv(paste(specdata, specdata_files[i], sep=""))
     
     ids <- c(ids, i)
     nobs <- c(nobs, sum(complete.cases(monitor_data)))
