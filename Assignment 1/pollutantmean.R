@@ -5,12 +5,12 @@
 
 pollutantmean <- function(directory, pollutant, id = 1:332) {
   
-  # 1. Define local variables
-  files <- list.files(directory)
-  monitors <- c()
-  
-  # 2. Get the dir of the specdata folder
+  # 1. Get the dir of the specdata folder
   specdata <- paste(getwd(), "/", directory, "/", sep="")
+  
+  # 2. Define local variables
+  files <- list.files(specdata)
+  monitors <- c()
   
   # 3. Get all data for the monitors 
   for (monitor in id) {
